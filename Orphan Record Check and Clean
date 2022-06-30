@@ -1,0 +1,24 @@
+
+
+#linkedin : https://www.linkedin.com/in/can-sayın-b332a157/
+#cansayin.com
+
+
+
+
+db.orderItems.find( { }, { _id: 1, _id: 0 } ).hint( { _id: 1 } ).explain(true)
+ 
+"chunkSkips" : 0, değerini kontrol et. 0 dan büyük ise orphan kayıt vardır.
+ 
+------ Clear Orphan
+var dbName: db.getName();
+db.getCollectionNames().forEach(function(cName) {
+  
+    var nameSpace = dbName.concat("."+cName);
+    result = db.runCommand({
+      cleanupOrphaned: nameSpace
+    });
+    if (result.ok != 1)
+      print(nameSpace + ":Unable to complete at this time: failure or timeout.")
+   
+  });
