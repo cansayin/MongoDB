@@ -1,0 +1,7 @@
+
+
+#linkedin : https://www.linkedin.com/in/can-sayın-b332a157/
+#cansayin.com
+
+
+db.getCollectionNames().forEach(function(collection) { resultCount = db[collection].count(); print("Results count for " + collection + ": "+ resultCount); });
