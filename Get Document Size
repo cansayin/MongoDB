@@ -1,0 +1,80 @@
+
+
+
+#linkedin : https://www.linkedin.com/in/can-sayın-b332a157/
+#cansayin.com
+
+
+---------- Get spesific document's size by id
+var doc = db.orderItems.find({_id:BinData(3,"rAVMRhVFIkv90jJ/DD8T/w==")});
+var size = Object.bsonsize(doc);
+print (size);
+--
+
+Object.bsonsize(db.test.findOne("616725b41be670be39946c20"));
+--
+
+const doc = db.test.findOne("616725b41be670be39946c20");
+Object.bsonsize(doc);
+
+
+
+------------- Returns document id which size is bigger
+
+1-) 
+
+db.test.find().toArray().map(function(test) { return {size:Object.bsonsize(test), _id:test._id}; }).sort(function(a, b) { return a.size-b.size; }).pop();
+ 
+2-) 
+
+var max = 0, id = null;
+ 
+db.test.find().forEach(doc => {
+    var size = Object.bsonsize(doc);
+    if(size > max) {
+        max = size;
+        id = doc._id;
+    }
+});
+ 
+ 
+print(""+id+", "+max);
+ 
+3-)
+let max = 0, id = null;
+db.test.find().forEach(doc => {
+    const size = Object.bsonsize(doc); 
+    if(size > max) {
+        max = size;
+        id = doc._id;
+    } 
+});
+print(id, max);
+ 
+-------------- Return documents which size is bigger than 6000000 bytes
+ 
+var max = 6000000, id = null, c = null ;
+ 
+db.getCollectionNames().forEach(function(cName) {
+    db[cName].find().forEach(doc => {
+        var size = Object.bsonsize(doc);
+        if(size > max) {
+        id = doc._id;
+        c = cName
+        print(c+", "+id+", "+size);
+         }
+        
+    });
+});
+-------------- Return all document sizes
+1-)
+
+db.test.find().forEach(function(obj){var size = Object.bsonsize(obj);print('_id: '+obj._id+' || Size: '+size+'B -> '+Math.round(size/(1024))+'KB -> '+Math.round(size/(1024*1024))+'MB (max 16MB)');});
+ 
+2-)
+var max = 0, id = null;
+db.test.find().forEach(doc => {
+    var size = Object.bsonsize(doc);
+id = doc._id;
+print(""+id+", "+size);
+  });
