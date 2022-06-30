@@ -1,0 +1,7 @@
+
+
+#linkedin : https://www.linkedin.com/in/can-sayın-b332a157/
+#cansayin.com
+
+
+db.getCollectionNames().map(name => ({totalIndexSize: db.getCollection(name).stats().totalIndexSize, name: name})).sort((a, b) => a.totalIndexSize - b.totalIndexSize).forEach(printjson)
