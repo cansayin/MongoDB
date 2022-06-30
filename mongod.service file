@@ -1,0 +1,42 @@
+
+
+#linkedin : https://www.linkedin.com/in/can-sayın-b332a157/
+#cansayin.com
+
+
+mongod.service file
+[Unit]
+Description=High-performance, schema-free document-oriented database
+After=network.target
+Documentation=https://docs.mongodb.org/manual
+[Service]
+User=mongouser
+Group=mongouser
+Environment="OPTIONS=--port 27018 --config /Products/mongodb/configs/mongod.conf"
+ExecStart=/usr/bin/mongod $OPTIONS
+ExecStartPre=/usr/bin/mkdir -p /var/run/mongodb
+ExecStartPre=/usr/bin/chown mongouser:mongouser /var/run/mongodb
+ExecStartPre=/usr/bin/chmod 0755 /var/run/mongodb
+PermissionsStartOnly=true
+PIDFile=/var/run/mongodb/mongod.pid
+# Type=forking
+# file size
+LimitFSIZE=infinity
+# cpu time
+LimitCPU=infinity
+# virtual memory size
+LimitAS=infinity
+# open files
+LimitNOFILE=64000
+# processes/threads
+LimitNPROC=64000
+# locked memory
+LimitMEMLOCK=infinity
+# total threads (user+kernel)
+TasksMax=infinity
+TasksAccounting=false
+# Recommended limits for for mongod as specified in
+# http://docs.mongodb.org/manual/reference/ulimit/#recommended-settings
+#Restart=always
+[Install]
+WantedBy=multi-user.target
