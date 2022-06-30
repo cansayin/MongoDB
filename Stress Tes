@@ -1,0 +1,20 @@
+
+
+#linkedin : https://www.linkedin.com/in/can-sayın-b332a157/
+#cansayin.com
+
+
+var day = 1000 * 60 * 60 * 24;
+var randomDate = function () {
+return new Date(Date.now() - (Math.floor(Math.random() * day)));
+}
+var randomName = function() {
+return (Math.random()+1).toString(36).substring(2);
+}
+for (var i = 1; i <= 10000000; ++i) {
+db.test.insert({
+name: randomName(),
+creationDate: randomDate(),
+uid: i
+});
+}
