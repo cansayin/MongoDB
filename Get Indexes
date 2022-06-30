@@ -1,0 +1,21 @@
+
+
+#linkedin : https://www.linkedin.com/in/can-sayın-b332a157/
+#cansayin.com
+
+
+--- List all index based on db
+db.getCollectionNames().forEach(function(collection) {
+   indexes = db[collection].getIndexes();
+   print("Indexes for " + collection + ":");
+   printjson(indexes);
+});
+ 
+ 
+---- For example, using the $indexStats aggregation stage would provide counters per index regarding total number and frequency of access.
+vardbname = "test";
+db.getSiblingDB(dbname).getCollectionInfos({ type: "collection"}).forEach(function(c) {  
+  db.getCollection(c.name).aggregate([{ $indexStats: {} }]).forEach(function(d) {
+    print(dbname + "."+ c.name + ": "+ d.name + " ("+ d.accesses.ops + " since "+ d.accesses.since + ")");
+  });
+})
